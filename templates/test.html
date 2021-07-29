@@ -1,0 +1,367 @@
+<html>
+	<head>
+		<title>OSTime</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<link rel="stylesheet" href="/static/css/main.css" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="/static/js/form.js"></script>
+		<script src="{{ url_for('static', filename='js/form.js') }}"></script>
+	</head>
+	<body>
+		<div class="socials">
+			<h1>{{ name }} </h1>
+			<a class="patreon" href="https://twitter.com/OSTime13" target="_blank"><img src="/static/img/Twitter_Icon.PNG"></a>
+			<a class="patreon" href="https://www.patreon.com/OSTime?fan_landing=true" target="_blank"><img src="/static/img/Patreon_Icon.PNG"></a>
+		</div>
+		<div>
+			<form id="gp-form">
+			  <label for="fname">How Much GP/HR Do You Make? (5m, 100k, etc.) </label><br>
+			  <input type="text" id="my-gp" style="width:10%" placeholder="1m">
+			  <button type="submit" id="update-button" class="btn btn-primary">Optimize</button>
+			</form> 
+			<button id="click" class="btn btn-secondary">5m</button>
+			<button id="click2" class="btn btn-secondary">2.5m</button>
+			<button id="click3" class="btn btn-secondary">1m</button>
+		</div>
+		<div class="icon-bar">
+			<button class="Yoe" id="herblore"><img src="/static/img/Herblore_Icon.PNG"></button>
+			<button class="Yoe" id="prayer"><img src="/static/img/Prayer_Icon.PNG"></button>
+			<button class="Yoe" id="crafting"><img src="/static/img/Crafting_Icon.PNG"></button>
+			<button class="Yoe" id="magic"><img src="/static/img/Magic_Icon.PNG"></button>
+			<button class="Yoe" id="fletching"><img src="/static/img/Fletching_Icon.PNG"></button>
+			<button class="Yoe" id="smithing"><img src="/static/img/Smithing_Icon.PNG"></button>
+			<button class="Yoe" id="construction"><img src="/static/img/Construction_Icon.PNG"></button>
+			<button class="Yoe" id="firemaking"><img src="/static/img/Firemaking_Icon.PNG"></button>
+			<button class="Yoe" id="cooking"><img src="/static/img/Cooking_Icon.PNG"></button>
+			<button class="Yoe" id="experience"><img src="/static/img/Experience_Icon.PNG"></button>
+		</div>
+		<br>
+		<table style="width:80%" class="table table-striped table-dark">
+			<tr>
+				<th colspan="2">Skill</th>
+				<th>Method</th>
+				<th>Total Hours</th>
+				<th>Training Hours</th>
+				<th>Money Hours</th>
+				<tbody id="t-body"> {{ table_string|safe }}</tbody>
+			</tr>
+		</table>
+		<!--<h1>{{ colors|safe }}</h1>
+		<div class="chart-container" style="position: relative; height:40vh; width:50vw">
+			<canvas id="swagChart"></canvas>
+		</div>
+		-->
+		<!--
+		<script>
+			$('#herblore').click(function () {
+				$.ajax({
+					data : {
+						gp : $('#my-gp').val(),//text field into variable
+						skill : 'Herblore'
+					},
+					type: 'POST',
+					url: '/lover',//name of the function in the app
+					success: function (response) {
+						//alert(JSON.stringify(response));//string version of the response
+						$('#t-body').empty();
+						$('#t-body').append(response);
+					}
+				});
+			});//herblore click
+		</script>
+		-->
+		<!--<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+		<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script> -->
+		<!--<script>
+			var ctx = document.getElementById('swagChart').getContext('2d');
+			var chart = new Chart(ctx, {
+			// The type of chart we want to create
+			type: 'bar',
+
+			// The data for our dataset
+			data: {
+			labels: ['Yea'],
+			datasets: [{
+				label: 'My First dataset',
+				backgroundColor: '#e9ecef',
+				borderColor: 'Black',
+				data: [1],
+			}]
+			},
+
+			// Configuration options go here
+			options: {
+				legend: {
+					labels: {
+						fontColor: "#ced4da",
+						fontSize: 18
+					}
+				},//legend
+				scales: {
+					xAxes: [{
+						ticks: {
+							fontColor: "#ced4da",
+						}
+					}],
+					yAxes: [{
+						ticks: {
+							fontColor: "#ced4da",
+						}
+					}],
+				},
+				layout: {
+					padding: {
+					}//padding
+				}//layout
+			}//options
+			});//chart
+			
+			ajax_chart(chart);
+
+			// function to update our chart
+			function ajax_chart(chart) {
+				//var data = data || {};
+				
+				chart.data.labels = ['2'];
+				chart.data.datasets[0].data = [334]; // or you can iterate for multiple datasets
+				chart.update(); // finally update our chart
+			});
+			
+			
+			
+		</script> -->
+		<script>
+			$('form').on('submit', function(event) {
+			$.ajax({
+				data : {
+					gp : $('#my-gp').val(),//text field into variable
+				},
+				type : 'POST',
+				url : '/titty'
+			})
+			.done(function(data) {
+				//alert(data);
+				$('#t-body').empty();
+				$('#t-body').append(data);
+			});
+			event.preventDefault();
+		});//gp-form
+
+		$('#click').click(function () {
+			$.ajax({
+				type: 'GET',
+				url: '/5m',//name of the function in the app
+				success: function (response) {
+					//alert(JSON.stringify(response));//string version of the response
+					//$('h1').text(response);//changes our h1 to the response we get from the server
+					$('#t-body').empty();
+					$('#t-body').append(response);
+					document.getElementById('my-gp').value = '5m';
+				}
+			});
+		});//5m click
+
+		$('#click2').click(function () {
+			$.ajax({
+				type: 'GET',
+				url: '/2_5m',//name of the function in the app
+				success: function (response) {
+					//alert(JSON.stringify(response));//string version of the response
+					//$('h1').text(response);//changes our h1 to the response we get from the server
+					$('#t-body').empty();
+					$('#t-body').append(response);
+					document.getElementById('my-gp').value = '2.5m';
+				}
+			});
+		});//2.5m click
+
+		$('#click3').click(function () {
+			$.ajax({
+				type: 'GET',
+				url: '/1m',//name of the function in the app
+				success: function (response) {
+					//alert(JSON.stringify(response));//string version of the response
+					$('#t-body').empty();
+					$('#t-body').append(response);
+					document.getElementById('my-gp').value = '1m';
+				}
+			});
+		});//1m click
+
+		$('#herblore').click(function () {
+			$.ajax({
+				data : {
+					gp : $('#my-gp').val(),//text field into variable
+					skill : 'Herblore'
+				},
+				type: 'POST',
+				url: '/lover',//name of the function in the app
+				success: function (response) {
+					//alert(JSON.stringify(response));//string version of the response
+					$('#t-body').empty();
+					$('#t-body').append(response);
+				}
+			});
+		});//herblore click
+
+		$('#prayer').click(function () {
+			$.ajax({
+				data : {
+					gp : $('#my-gp').val(),//text field into variable
+					skill : 'Prayer'
+				},
+				type: 'POST',
+				url: '/lover',//name of the function in the app
+				success: function (response) {
+					//alert(JSON.stringify(response));//string version of the response
+					$('#t-body').empty();
+					$('#t-body').append(response);
+				}
+			});
+		});//prayer click
+
+		$('#crafting').click(function () {
+			$.ajax({
+				data : {
+					gp : $('#my-gp').val(),//text field into variable
+					skill : 'Crafting'
+				},
+				type: 'POST',
+				url: '/lover',//name of the function in the app
+				success: function (response) {
+					//alert(JSON.stringify(response));//string version of the response
+					$('#t-body').empty();
+					$('#t-body').append(response);
+				}
+			});
+		});//crafting click
+
+		$('#magic').click(function () {
+			$.ajax({
+				data : {
+					gp : $('#my-gp').val(),//text field into variable
+					skill : 'Magic'
+				},
+				type: 'POST',
+				url: '/lover',//name of the function in the app
+				success: function (response) {
+					//alert(JSON.stringify(response));//string version of the response
+					$('#t-body').empty();
+					$('#t-body').append(response);
+				}
+			});
+		});//magic click
+
+		$('#fletching').click(function () {
+			$.ajax({
+				data : {
+					gp : $('#my-gp').val(),//text field into variable
+					skill : 'Fletching'
+				},
+				type: 'POST',
+				url: '/lover',//name of the function in the app
+				success: function (response) {
+					//alert(JSON.stringify(response));//string version of the response
+					$('#t-body').empty();
+					$('#t-body').append(response);
+				}
+			});
+		});//fletching click
+
+		$('#smithing').click(function () {
+			$.ajax({
+				data : {
+					gp : $('#my-gp').val(),//text field into variable
+					skill : 'Smithing'
+				},
+				type: 'POST',
+				url: '/lover',//name of the function in the app
+				success: function (response) {
+					//alert(JSON.stringify(response));//string version of the response
+					$('#t-body').empty();
+					$('#t-body').append(response);
+				}
+			});
+		});//smithing click
+
+		$('#construction').click(function () {
+			$.ajax({
+				data : {
+					gp : $('#my-gp').val(),//text field into variable
+					skill : 'Construction'
+				},
+				type: 'POST',
+				url: '/lover',//name of the function in the app
+				success: function (response) {
+					//alert(JSON.stringify(response));//string version of the response
+					$('#t-body').empty();
+					$('#t-body').append(response);
+				}
+			});
+		});//construction click
+
+		$('#firemaking').click(function () {
+			$.ajax({
+				data : {
+					gp : $('#my-gp').val(),//text field into variable
+					skill : 'Firemaking'
+				},
+				type: 'POST',
+				url: '/lover',//name of the function in the app
+				success: function (response) {
+					//alert(JSON.stringify(response));//string version of the response
+					$('#t-body').empty();
+					$('#t-body').append(response);
+				}
+			});
+		});//firemaking click
+
+		$('#cooking').click(function () {
+			$.ajax({
+				data : {
+					gp : $('#my-gp').val(),//text field into variable
+					skill : 'Cooking'
+				},
+				type: 'POST',
+				url: '/lover',//name of the function in the app
+				success: function (response) {
+					//alert(JSON.stringify(response));//string version of the response
+					$('#t-body').empty();
+					$('#t-body').append(response);
+				}
+			});
+		});//cooking click
+
+		$('#experience').click(function () {
+			$.ajax({
+				data : {
+					gp : $('#my-gp').val(),//text field into variable
+				},
+				type: 'POST',
+				url: '/titty',//name of the function in the app
+				success: function (response) {
+					//alert(JSON.stringify(response));//string version of the response
+					$('#t-body').empty();
+					$('#t-body').append(response);
+				}
+			});
+		});//experience click
+		</script>
+		<!--<button id="ye">Click Me</button> -->
+		<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --->
+		<!--<script>
+			$('#ye').click(function(){
+				$.ajax({
+					type: 'GET',
+					url: '/beta',
+					success: function (response) {
+						alert(response);
+					}
+				});
+			});
+		</script>-->
+		<!---<script src="/static/js/form.js"></script> --->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	</body>
+</html>
