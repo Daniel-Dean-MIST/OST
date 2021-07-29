@@ -1,0 +1,94 @@
+h1 {
+	color: White;
+	text-align: center;
+}
+
+body {
+	background-color: #212529;
+}
+
+div, button, input {
+	text-align: center;
+	color: black;
+}
+
+.floated {
+   float:left;
+   margin-right:5px;
+}
+
+label {
+	color: White;
+}
+
+input {
+	color: Black;
+	border-radius: 10px;
+}
+
+table {
+	padding-top: 10px;
+	color: black;
+	background-color: #32325d;
+	border: 1px solid white;
+	border-collapse: collapse;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+tr, td, th {
+	color: white;
+	border: 1px solid #ced4da;
+	border-collapse: collapse;
+	text-align: center;
+}
+
+td {
+	text-align: center;
+}
+
+img {
+	border-radius: 10px;
+	width: 32px;
+	height: 32px;
+	
+}
+
+.custo{
+	border: 1px solid #ced4da;
+	border-collapse: collapse;
+}
+
+.Yoe{
+	border-radius: 10px;
+	padding: 0px;
+	background-color: black;
+	border-color: black;
+}
+
+.icon-bar {
+	padding-top: 50px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+	height: 10%;
+}
+
+.chart-container {
+	margin-left:auto;
+	margin-right: auto;
+}
+
+.Socials{
+    text-align: right;
+    margin-right: 10px;
+}
+
+.patreon{
+    text-align: right;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding-top: 25px;
+    border-radius: 10px;
+}
