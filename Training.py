@@ -214,7 +214,7 @@ def make_table_string(price):
 
     all_data = [pd.read_json(x) for x in json_list]
     #time.sleep(5)
-    print(all_data)
+    #print(all_data)
     all_data = optimize_all(all_data, price)
     all_data = [x.drop(x.columns[[0, 1]], axis=1) for x in all_data]
     # print(all_data)
@@ -257,7 +257,10 @@ def make_table_string(price):
 def make_skill_string(price, skill):
     all_data = str(skill) + '.json'
     all_data = pd.read_json(all_data)
-    all_data = optimize_training_2(all_data, price, 13034431)
+    try:
+        all_data = optimize_training_2(all_data, price, 13034431)
+    except:
+        all_data = optimize_training_2(all_data, 1000000, 13034431)
     all_data = all_data.drop(all_data.columns[[0, 1]], axis=1)
     # print(all_data[['Product', 'Total Hours', 'Training Hours', 'Money Making Hours']])
     # print(all_data)
@@ -418,3 +421,5 @@ for x in optimized_list:
 
 make_everything(0)
 '''
+
+#Items.make_csv()

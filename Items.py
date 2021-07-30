@@ -61,14 +61,14 @@ def get_all_prices(content):
 #makes a dataframe out of our name_list and price_list and then saves it to an item_list csv file
 def make_csv():
     all_info = get_all_info()
-    print(all_info)
-    time.sleep(1)
+    #print(all_info)
+    sleep(1)
     name_list = get_all_names(all_info)
-    print(name_list)
-    time.sleep(1)
+    #print(name_list)
+    sleep(1)
     price_list = get_all_prices(all_info)
-    print(price_list)
-    time.sleep(1)
+    #print(price_list)
+    sleep(1)
     #print(name_list, price_list)
 
     df = {'Item': name_list,
