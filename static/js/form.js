@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
 
-
+    /*
 	$('#prayer').click(function () {
 		$.ajax({
 			data : {
@@ -17,4 +17,5 @@ $(document).ready(function() {
 			}
 		});
 	});//prayer click
+	*/
 });
