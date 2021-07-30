@@ -207,8 +207,8 @@ def make_table_string(price):
                        'Cooking']
     json_list = ['Herblore.json', 'Prayer.json', 'Crafting.json', 'Magic.json', 'Fletching.json', 'Smithing.json',
                  'Construction.json', 'Firemaking.json', 'Cooking.json']
-    img_list = ['Herblore_Icon.png', 'Prayer_Icon.png', 'Crafting_Icon.png', 'Magic_Icon.png', 'Fletching_Icon.png',
-                'Smithing_Icon.png', 'Construction_Icon.png', 'Firemaking_Icon.png', 'Cooking_Icon.png']
+    img_list = ['Herblore_Icon.PNG', 'Prayer_Icon.PNG', 'Crafting_Icon.PNG', 'Magic_Icon.PNG', 'Fletching_Icon.PNG',
+                'Smithing_Icon.PNG', 'Construction_Icon.PNG', 'Firemaking_Icon.PNG', 'Cooking_Icon.PNG']
     id_list = ['herblore', 'prayer', 'crafting', 'magic', 'fletching', 'smithing', 'construction', 'firemaking',
                'cooking']
 
