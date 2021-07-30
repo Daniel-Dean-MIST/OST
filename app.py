@@ -133,7 +133,10 @@ def titty():
 
     price = Training.make_string_cleanup(gp_hour)
 
-    table_string = Training.make_table_string(price)
+    try:
+        table_string = Training.make_table_string(price)
+    except:
+        table_string = Training.make_table_string(1000000)
 
     return table_string
 
