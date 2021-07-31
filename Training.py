@@ -421,5 +421,5 @@ for x in optimized_list:
 
 make_everything(0)
 '''
-
+#make_everything(0)
 #Items.make_csv()
