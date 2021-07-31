@@ -73,7 +73,10 @@ def make_potions():
                                         [150])
 
 
-    df_2['Cost'] = int((df_2['Cost'] - df_3['Cost']) / -13.844)
+    df_2['Cost'] = int((df_2['Cost'] + df_3['Cost']) / -14)
+    df_2['GP/HR'] = df_2['Cost'] * 2166
+    df_2['XP/HR'] = 150 * 2166
+    print(df_2[['Cost', 'GP/HR', 'XP/HR']])
     df = df.append(df_2)
 
     df_2 = df_2 = Items.make_double_supplies_2(['super_antifire_potion(4)'], ['lava_scale_shard'], ['extended_super_antifire(4)'], 1, 4, 1,
@@ -216,6 +219,9 @@ for x in df.iterrows():
         df = df.drop(x[0])
     #print(df)
 '''
-# print(df[['Product', 'GP/HR', 'XP/HR']])
+
+df = make_herblore()
+
+print(df[['Product', 'GP/HR', 'XP/HR']])
 # print(df[['Product', 'Base Ingredient', 'Base Ingredient Cost']])
 # print(df[['Product', 'Cost', 'Base Ingredient Cost', 'Secondary Ingredient Cost']])
