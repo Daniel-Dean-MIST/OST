@@ -220,8 +220,8 @@ for x in df.iterrows():
     #print(df)
 '''
 
-df = make_herblore()
+#df = make_herblore()
 
-print(df[['Product', 'GP/HR', 'XP/HR']])
+#print(df[['Product', 'GP/HR', 'XP/HR']])
 # print(df[['Product', 'Base Ingredient', 'Base Ingredient Cost']])
 # print(df[['Product', 'Cost', 'Base Ingredient Cost', 'Secondary Ingredient Cost']])
