@@ -425,3 +425,32 @@ def parse_df_prices(df, name_list):
 #content = gather_price('https://oldschool.runescape.wiki/w/Coal')
 #content = gather_price('Cooked_karambwan')
 #print(content)
+'''
+import numpy as np
+def powerup(i):
+	if i==1:
+		return 1
+	else:
+		return np.square(i) + powerup(i-1)
+
+print(powerup(4))
+
+print(max(21, 14))
+'''
+'''
+j = 1
+k = 2
+
+for i in range(3):
+	j += k
+	k += j
+print(k)
+
+strings = ['a', 'bc', 'def', 'ghij']
+output = ''
+for x in strings:
+	if len(x) % 2 == 0:
+		continue
+	output += x
+print(output)
+'''
