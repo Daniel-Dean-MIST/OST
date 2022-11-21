@@ -27,7 +27,7 @@ def make_heads():
 					'ensouled_horror_head', 'ensouled_kalphite_head', 'ensouled_dagannoth_head', 'ensouled_bloodveld_head',
 					'ensouled_tzhaar_head', 'ensouled_demon_head', 'ensouled_aviansie_head', 'ensouled_abyssal_head',
 					'ensouled_dragon_head']
-
+    
     supply_1_list = []
     supply_1_price_list = []
     supply_1_name_list = []
@@ -104,7 +104,6 @@ def make_heads():
     rune_price = int(blood_rune_price) * 2 + int(nature_rune_price) * 4 + int(soul_rune_price) * 4
     supply_2_price_list.append(rune_price)
 
-    print(len(supply_1_price_list), len(supply_2_price_list))
     # gets our total_cost
     total_cost_list = []
 
@@ -135,7 +134,7 @@ def make_heads():
         if x[1][5] == 0:
             # print(x[1][5])
             df = df.drop(x[0])
-
+            
     return df
 
 #print(make_heads())
@@ -144,11 +143,12 @@ def make_heads():
 # print(Items.get_xp_hour(xp_each_list, chaos_per_hour))
 
 def make_prayer():
+    level_list = []
     gilded_per_hour = 2550
     chaos_per_hour = 2000
     xp_each_list = [15.7, 15.7, 15.7, 17.5, 18.5, 52.5, 52.5, 78.7, 87.5, 105, 175, 252, 252, 280, 294, 297.5, 336, 385,
                     437.5, 490, 525]
-
+    
     supply_name_list = ['bones', 'wolf_bones', 'burnt_bones', 'monkey_bones', 'bat_bones', 'big_bones', 'jogre_bones',
                         'zogre_bones',
                         'shaikahan_bones', 'babydragon_bones', 'wyrm_bones', 'wyvern_bones', 'dragon_bones',
@@ -165,7 +165,6 @@ def make_prayer():
 
     df_2 = Items.make_no_product(supply_name_list, 1, 0, gilded_per_hour, xp_each_list)
     df_2['Product'] = '(Gilded): ' + df_2['Base Ingredient']
-
     df = df.append(df_2)
 
     #df['Secondary Ingredient'] = ['N/A' for x in range(len(df['Cost']))]
@@ -174,7 +173,8 @@ def make_prayer():
     # print(df)
 
     df = df.append(make_heads())
-
+    level_list = [1 for x in df['Product']]
+    df['Level'] = level_list
     return df
 
 #print(make_prayer())
@@ -187,3 +187,5 @@ def make_prayer():
 # print(df[['Product', 'GP/HR', 'XP/HR']])
 
 # print(make_prayer()[['Product', 'GP/HR', 'XP/HR']])
+
+#print(make_prayer())

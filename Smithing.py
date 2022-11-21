@@ -10,6 +10,7 @@ def make_bars():
     product_name_list = ['iron_bar', 'steel_bar', 'mithril_bar', 'adamantite_bar', 'runite_bar', 'gold_bar', 'gold_bar']
     xp_each_list = [12.5, 17.5, 30, 37.5, 50, 22.5, 56.2]
     bars_per_hour_list = [6000, 5400, 3600, 2700, 2150, 6000, 6400]
+    level_list = [15, 30, 50, 70, 85, 40, 40]
 
     #iron
     df = Items.make_double_supplies_2([supply_name_list[0]], [supply_name_list_2[0]], [product_name_list[0]], 1, 0, 1, bars_per_hour_list[0], [xp_each_list[0]])
@@ -41,6 +42,7 @@ def make_bars():
                                         bars_per_hour_list[6], [xp_each_list[6]])
     df_2['Product'] = ['B.F. Gauntlets: Gold Bar']
     df = df.append(df_2)
+    df['Level'] = level_list
     return df
 
 #print(make_bars()['GP/HR'])
@@ -55,26 +57,38 @@ def make_darts():
     #Items.find_mispelled_item(product_name_list)
     xp_each_list = [1.25, 2.5, 3.75, 5, 6.25, 7.5]
     actions_per_hour = 950
+    level_list = [4, 19, 34, 54, 74, 89]
 
     df = Items.make_product(supply_name_list, product_name_list, 1, 10, actions_per_hour, xp_each_list)
-
+    df['Level'] = level_list
     return df
 
 #print(make_darts())
 
 # lets us put in variable number of supply and products
 def make_armor():
-    product_name_list = ['steel_platebody', 'mithril_platelegs', 'mithril_plateskirt', 'mithril_platebody',
-                         'adamant_platebody',
+    product_name_list = ['mithril_platelegs', 'mithril_plateskirt',
                          'rune_platelegs', 'rune_plateskirt', 'rune_2h_sword']
     supply_name_list = ['steel_bar', 'mithril_bar', 'mithril_bar', 'mithril_bar', 'adamantite_bar', 'runite_bar',
                         'runite_bar', 'runite_bar']
-
-    supply_quantity_list = [5, 3, 3, 5, 5, 3, 3, 3]
+    level_list = [66, 66, 99, 99, 99, 48, 68, 88, 99]
+    supply_quantity_list = [3, 3, 3, 3, 3]
     product_quantity_list = [1 for x in supply_quantity_list]
     actions_per_hour = 1112
-    xp_each_list = [187.5, 150, 150, 250, 312.5, 225, 225, 225]
+    xp_each_list = [150, 150, 225, 225, 225]
     df_list = [Items.make_product([supply_name_list[x]], [product_name_list[x]], supply_quantity_list[x], product_quantity_list[x], actions_per_hour, [xp_each_list[x]])
+               for x in range(len(product_name_list))]
+
+    # doing platebodies
+    product_name_list = ['steel_platebody', 'mithril_platebody',
+                         'adamant_platebody', 'rune_platebody']
+    supply_name_list = ['steel_bar', 'mithril_bar', 'adamantite_bar', 'runite_bar']
+    supply_quantity_list = [5, 5, 5, 5]
+    product_quantity_list = [1 for x in supply_quantity_list]
+    actions_per_hour = 768
+    xp_each_list = [187.5, 250, 312.5, 375]
+
+    platebody_df = [Items.make_product([supply_name_list[x]], [product_name_list[x]], supply_quantity_list[x], product_quantity_list[x], actions_per_hour, [xp_each_list[x]])
                for x in range(len(product_name_list))]
 
     #print(df_list)
@@ -84,9 +98,13 @@ def make_armor():
     df = df.append(df_list[2])
     df = df.append(df_list[3])
     df = df.append(df_list[4])
-    df = df.append(df_list[5])
-    df = df.append(df_list[6])
-    df = df.append(df_list[7])
+
+    df = df.append(platebody_df[0])
+    df = df.append(platebody_df[1])
+    df = df.append(platebody_df[2])
+    df = df.append(platebody_df[3])
+    
+    df['Level'] = level_list
     return df
 
 
@@ -94,10 +112,11 @@ def make_cannonballs():
     supply_name_list = ['steel_bar']
     product_name_list = ['cannonball']
     xp_each_list = [25.6]
-    actions_per_hour = 540
+    actions_per_hour = 1080
+    level_list = [35]
 
     df = Items.make_product(supply_name_list, product_name_list, 1, 4, actions_per_hour, xp_each_list)
-
+    df['Level'] = level_list
     return df
 
 #print(make_cannonballs())
@@ -116,3 +135,7 @@ def make_smithing():
 
 # print(df[['Product', 'Cost', 'GP/HR', 'XP/HR']])
 # print(df[['Product', 'Base Ingredient', 'Secondary Ingredient']])
+
+#print(make_armor())
+
+#print(make_smithing())

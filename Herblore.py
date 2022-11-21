@@ -45,22 +45,39 @@ def make_potions():
     potions_per_hour = 2500
     xp_each_list = [25, 37.5, 50, 60, 62.5, 67.5, 80, 84, 87.5, 100, 106.3, 112.5, 117.5, 120, 125, 142.5, 150, 157.5,
                     162.5, 172.5, 155, 155, 180, 130, 125]
+    
+    level_list = [3, 5, 12, 22, 
+    22, 
+    26, 34, 36, 38, 
+    45, 
+    48, 50, 52, 53,
+    55,
+    63, 66, 69, 72,
+    76, 
+    80, 80, 81, 92, 94]
+    
     actions_per_hour = potions_per_hour
     df = Items.make_double_supplies(supply_name_list, supply_name_list_2, product_name_list, 1, 1, actions_per_hour,
                                     xp_each_list)
 
     df_2 = Items.make_double_supplies_2(['super_energy(4)'], ['amylase_crystal'], ['stamina_potion(4)'],  1, 4, 1, actions_per_hour,
                                     [102])
+    level_list.append(77)
+    
     df = df.append(df_2)
 
     df_2 = Items.make_double_supplies_2(['antifire_potion(4)'], ['lava_scale_shard'], ['extended_antifire(4)'], 1, 4, 1,
                                         actions_per_hour,
                                         [110])
+    level_list.append(84)
+    
     df = df.append(df_2)
 
     df_2 = Items.make_double_supplies_2(['antidote++(4)'], ["zulrah's_scales"], ['anti-venom(4)'], 1, 20, 1,
                                         actions_per_hour,
                                         [120])
+    level_list.append(87)
+    
     df = df.append(df_2)
 
     df_2 = Items.make_double_supplies_2(['super_attack(4)'], ['super_strength(4)'], ['super_combat_potion(4)'], 1, 1, 1,
@@ -71,7 +88,8 @@ def make_potions():
                                         1,
                                         actions_per_hour,
                                         [150])
-
+    
+    level_list.append(90)
 
     df_2['Cost'] = int((df_2['Cost'] + df_3['Cost']) / -14)
     df_2['GP/HR'] = df_2['Cost'] * 2166
@@ -82,12 +100,14 @@ def make_potions():
     df_2 = df_2 = Items.make_double_supplies_2(['super_antifire_potion(4)'], ['lava_scale_shard'], ['extended_super_antifire(4)'], 1, 4, 1,
                                         actions_per_hour,
                                         [160])
+    level_list.append(98)
     df = df.append(df_2)
 
     df_2 = Items.make_double_supplies_2(['tarromin_potion_(unf)'], ['ashes'], ['onion_seed'], 1, 1, 1,
                                         actions_per_hour,
                                         [50])
     df_2['Product'] = ['serum_207']
+    level_list.append(15)
     df = df.append(df_2)
     #stamina_potion(4), super_energy(4), amylase_crystal * 4
     #extended_antifire(4), antifire_potion(4), lava_scale_shard * 4
@@ -96,7 +116,7 @@ def make_potions():
     #extended_super_antifire_(4), super_antifire_potion(4), lava_scale_shard * 4
     #onion_seed (serum_207), tarromin_potion_(unf), ashes
     #print(len(supply_name_list), len(product_name_list), len(supply_name_list_2))
-
+    df['Level'] = level_list
     return df
 
     '''
@@ -185,7 +205,7 @@ def get_chemistry(potion_3_list, potion_4_list, response):
         df['Product'] = '(Chemistry) ' + df['Product']
 
         df = df.dropna()
-
+        
         # df['Base Ingredient'] *= -1
         # print(df)
         return df

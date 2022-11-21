@@ -9,11 +9,15 @@ def make_darts():
     product_name_list = ['bronze_dart', 'iron_dart', 'steel_dart', 'mithril_dart', 'adamant_dart',
                          'rune_dart', 'dragon_dart', 'amethyst_dart']
     xp_each_list = [1.8, 3.8, 7.5, 11.2, 15, 18.8, 25, 21]
+    level_list = [10, 22, 37, 52, 67,
+    81, 90, 95]
+    
     actions_per_hour = 126000
     # 25 darts per game tick average
 
     df = Items.make_double_supplies(supply_name_list, supply_name_list_2, product_name_list, 10, 10, actions_per_hour,
                                     xp_each_list)
+    df['Level'] = level_list
     return df
 
 def make_arrows():
@@ -26,6 +30,10 @@ def make_arrows():
     supply_name_list = ['headless_arrow' for x in range(len(supply_name_list_2))]
 
     xp_each_list = [1.3, 2.5, 5, 7.5, 10, 10, 12.5, 13.5, 15]
+    level_list = [1, 15, 30, 45,
+    52, 60, 75, 82,
+    90,
+    1]
     actions_per_hour = 45000
 
     #headless arrow
@@ -42,6 +50,7 @@ def make_arrows():
                          'rune_arrow', 'amethyst_arrow', 'dragon_arrow']
 
     df['Product'] = product_name_list
+    df['Level'] = level_list
     return df
 
 
@@ -52,10 +61,13 @@ def cut_bows():
                          'maple_shortbow_(u)', 'maple_longbow_(u)', 'yew_shortbow_(u)', 'yew_longbow_(u)', 'magic_shortbow_(u)',
                          'magic_longbow_(u)']
     xp_each_list = [5, 10, 16.5, 25, 33.33, 41.5, 50, 58.3, 67.5, 75, 83.3, 91.5]
+    level_list = [5, 10, 20, 25, 35, 40, 50, 55,
+    65, 70, 80, 85]
     actions_per_hour = 1700
 
     df = Items.make_product(supply_name_list, product_name_list, 1, 1, actions_per_hour, xp_each_list)
     df['Product'] = 'Cut: ' + df['Product']
+    df['Level'] = level_list
     return df
 
 def string_bows():
@@ -67,30 +79,38 @@ def string_bows():
                          'magic_longbow']
     supply_name_list_2 = ['bow_string' for x in range(len(product_name_list))]
     xp_each_list = [5, 10, 16.5, 25, 33.33, 41.5, 50, 58.3, 67.5, 75, 83.3, 91.5]
+    level_list = [5, 10, 20, 25, 35, 40, 50, 55,
+    65, 70, 80, 85]
     actions_per_hour = 2450
 
     df = Items.make_double_supplies(supply_name_list, supply_name_list_2, product_name_list, 15, 15,
                                     actions_per_hour,
                                     xp_each_list)
     df['Product'] = 'String: ' + df['Product']
+    
+    df['Level'] = level_list
     return df
 
 def make_battlestaves():
     supply_name_list = ['celastrus_bark']
     product_name_list = ['battlestaff']
     xp_each_list = [80]
+    level_list = [40]
     actions_per_hour = 1700
 
     df = Items.make_product(supply_name_list, product_name_list, 1, 1, actions_per_hour, xp_each_list)
+    df['Level'] = level_list
     return df
 
 def make_redwood_shields():
     supply_name_list = ['redwood_logs']
     product_name_list = ['redwood_shield']
-    xp_each_list = [92]
+    xp_each_list = [216]
+    level_list = [92]
     actions_per_hour = 1826
 
     df = Items.make_product(supply_name_list, product_name_list, 2, 1, actions_per_hour, xp_each_list)
+    df['Level'] = level_list
     return df
 
 
@@ -122,3 +142,5 @@ print(df)
 print(df[['Product', 'Cost', 'GP/HR', 'XP/HR', 'Secondary Ingredient Cost']])
 print(df[['Product', 'Base Ingredient', 'Secondary Ingredient']])
 '''
+
+#print(make_fletching())

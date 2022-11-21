@@ -20,6 +20,7 @@ def make_standard():
     #plank_id_list = [8778, 8780, 8782, 2353]
     #plank_list = Items.get_item_info(plank_id_list, response)
     #print('YO TRINITY')
+    level_list = [33, 52, 66, 50, 74]
     df = pd.read_csv(r"item_list.csv")
     name_list = ['oak_plank', 'teak_plank', 'mahogany_plank', 'steel_bar', 'iron_bar']
 
@@ -83,7 +84,7 @@ def make_standard():
     df['Secondary Ingredient Cost'] = servant_cost_list
     df['Cost'] = [df['Cost'].iloc[x] + servant_cost_list[x] for x in range(len(servant_cost_list))]
     df['GP/HR'] = [df['Cost'].iloc[x] * actions_per_hour_list[x] for x in range(len(servant_cost_list))]
-
+    df['Level'] = level_list
     return df
 
 
@@ -105,6 +106,7 @@ def make_mahogany_homes():
 
     steel_bar_price = Items.parse_df_prices(df, ['steel_bar'])
     steel_bars_per_hour = [22, 22, 23, 23, 25, 25]
+    level_list = [20, 20, 50, 50, 70, 70]
 
     steel_bar_cost_list = [steel_bar_price for x in range(len(steel_bars_per_hour))]
 
@@ -149,6 +151,8 @@ def make_mahogany_homes():
     df['Cost'] += df['Secondary Ingredient Cost']
     df['GP/HR'] = [df['Cost'].iloc[x] * actions_per_hour_list[x] for x in range(len(actions_per_hour_list))]
     # print(df)
+
+    df['Level'] = level_list
     return df
 
 

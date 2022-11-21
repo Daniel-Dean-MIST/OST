@@ -4,6 +4,7 @@ import Experience, Money_Makers, Items, Herblore, Prayer, Crafting, Magic, Fletc
     Firemaking, Cooking
 import time
 
+player_level = 1
 
 # finds how many hours the user needs to make money
 # finds how many hours the user needs to train using the method
@@ -59,8 +60,14 @@ def optimize_training(df, money_df, needed_exp):
 
     return df2
 
-
-def optimize_training_2(df, money_hr, needed_exp):
+#for non-macro hours
+def optimize_training_2(df, money_hr, player_xp):
+    
+    #gets the base level to xp df
+    level_xp_df = Experience.get_level_xp_df()
+    
+    needed_exp = level_xp_df['Xp'].loc[99] - int(player_xp)
+    
     df2 = df
 
     # how many hours our user needs to train
@@ -109,6 +116,72 @@ def optimize_training_2(df, money_hr, needed_exp):
 
     return df2
 
+#for macro hours
+def optimize_training_3(df, money_hr, player_xp):
+
+    level_xp_df = Experience.get_level_xp_df()
+    needed_exp = level_xp_df['Xp'].loc[99] - int(player_xp)
+    
+    df2 = df
+
+    # how many hours our user needs to train
+    total_training_hours = round(needed_exp / df['XP/HR'], 2)
+
+    df2['Training Hours'] = total_training_hours
+
+    # how much money we need to fund their desired level
+    df2['GP/XP'] = df2['GP/HR'] / df2['XP/HR']
+    training_cost = -round(needed_exp * df2['GP/XP'] / 1000000, 2)
+    df2['Training Cost'] = training_cost
+
+    # df2['Training Cost'] = training_cost
+
+    money_hours_list = []
+    # for every methods training cost
+    for t_method in df2['Training Cost']:
+        # finds how many hours it would take to pay for the method for every money making method
+        money_hours = 1 * t_method * 1000000 / money_hr
+        # money_hours = -1 * t_method * 1000000 / money_hr
+        money_hours = round(money_hours, 2)
+        # if the method doesn't loose any money, then we set the money making hours = 0.
+        #if money_hours < 0:
+        #    money_hours = 0
+        # adds our money making hours to a list
+        money_hours_list.append(money_hours)
+
+    df2['Money Making Hours'] = money_hours_list
+    df2['Total Hours'] = df2['Training Hours'] + df2['Money Making Hours']
+
+    #print(df2['Total Hours'])
+
+    # Sorts our df based off of Total Hours
+    df2 = df2.sort_values('Total Hours')
+    df2 = df2.reset_index()
+
+    # How Efficient Each Method is Compared to the best Method
+    efficiency_list = df2['Total Hours'].iloc[0] / df2['Total Hours']
+    df3 = df2
+
+    #saves our total hours from df3 before it gets changed
+    temp_total_list = df3['Total Hours'].to_list()
+
+    #if our total hours is - then we make it positive in df3 to make an accuracte efficiency metric
+    if df3['Total Hours'].iloc[0] < 0:
+
+        df3['Total Hours'] -= df3['Total Hours'].iloc[0] * 2
+        efficiency_list = df3['Total Hours'].iloc[0] / df3['Total Hours']
+
+    # Used to display our efficiency more cleanly
+    formatted_efficiency_list = []
+    for ef in  efficiency_list:
+        f_ef = str(round(ef * 100.00, 2)) + '%'
+
+
+        formatted_efficiency_list.append(f_ef)
+
+    df2['Efficiency'] = formatted_efficiency_list
+    df2['Total Hours'] = temp_total_list
+    return df2
 
 # gets all of our prices and returns optimized df's
 def make_all_skills():
@@ -151,8 +224,21 @@ def make_all_skills():
 
 
 # optimizes all of our skills
-def optimize_all(df_list, gold_per_hour):
-    optimized_df_list = [optimize_training_2(x, gold_per_hour, 13034431) for x in df_list]
+def optimize_all(df_list, gold_per_hour, macro):
+    skill_list = ['Herblore', 'Prayer', 'Crafting', 'Magic', 'Fletching', 'Smithing', 'Construction', 'Firemaking', 'Cooking']
+    level_df = pd.DataFrame()
+    optimized_df_list = []
+            
+    i = 0
+    while i < len(skill_list):
+        if macro == 'true':
+
+            optimized_df_list.append(optimize_training_3(df_list[i], gold_per_hour, 13034431))
+
+        else:
+
+            optimized_df_list.append(optimize_training_2(df_list[i], gold_per_hour, 13034431))
+        i += 1
     return optimized_df_list
 
 
@@ -186,14 +272,15 @@ def json_all_base(df_list):
 # makes all of our optimized dfs based off of gp
 # puts all of our df data into json files
 # calls itself again every 10 minutes
-def make_everything(times_updated):
+def make_everything():
+    #player_df = Experience.get_player_level_df(username)
     Items.make_csv()
     df_list = make_all_skills()
-
+    
     json_all_base(df_list)
 
     times_updated += 1
-    print(times_updated)
+    #print(times_updated)
     #time.sleep(5)
 
     #make_everything(times_updated)
@@ -202,7 +289,7 @@ def make_everything(times_updated):
 # turns all jsons into df
 # turns df information into table_string
 # returns table_string
-def make_table_string(price):
+def make_table_string(price, macro, player_level):
     skill_name_list = ['Herblore', 'Prayer', 'Crafting', 'Magic', 'Fletching', 'Smithing', 'Construction', 'Firemaking',
                        'Cooking']
     json_list = ['Herblore.json', 'Prayer.json', 'Crafting.json', 'Magic.json', 'Fletching.json', 'Smithing.json',
@@ -215,7 +302,7 @@ def make_table_string(price):
     all_data = [pd.read_json(x) for x in json_list]
     #time.sleep(5)
     #print(all_data)
-    all_data = optimize_all(all_data, price)
+    all_data = optimize_all(all_data, price, macro)
     all_data = [x.drop(x.columns[[0, 1]], axis=1) for x in all_data]
     # print(all_data)
     i = 0
@@ -253,14 +340,24 @@ def make_table_string(price):
 
     return table_string
 
-
-def make_skill_string(price, skill):
+#makes table string for each skill
+def make_skill_string(price, skill, checked, player_level):
+    #player_level = 55
     all_data = str(skill) + '.json'
     all_data = pd.read_json(all_data)
-    try:
-        all_data = optimize_training_2(all_data, price, 13034431)
-    except:
-        all_data = optimize_training_2(all_data, 1000000, 13034431)
+
+    if checked == 'true':
+        print('Hey')
+        try:
+            all_data = optimize_training_3(all_data, price, player_level)
+        except:
+            all_data = optimize_training_3(all_data, 1000000, 1)
+
+    else:
+        try:
+            all_data = optimize_training_2(all_data, price, player_level)
+        except:
+            all_data = optimize_training_2(all_data, 1000000, 1)
     all_data = all_data.drop(all_data.columns[[0, 1]], axis=1)
     # print(all_data[['Product', 'Total Hours', 'Training Hours', 'Money Making Hours']])
     # print(all_data)
@@ -281,14 +378,14 @@ def make_skill_string(price, skill):
         table_string += '<td>' + str(round(my_data['Total Hours'].to_dict()[i], 2)) + '</td>'
         table_string += '<td>' + str(round(my_data['Training Hours'].to_dict()[i], 2)) + '</td>'
         table_string += '<td>' + str(round(my_data['Money Making Hours'].to_dict()[i], 2)) + '</td>'
-        table_string += '<td>' + my_data['Efficiency'].to_dict()[i] + ' : Efficiency</td>'
+        table_string += '<td>' + my_data['Efficiency'].to_dict()[i] + ' : Efficient</td>'
         table_string += "</tr>"
 
         i += 1
 
     return table_string
 
-
+#gets the gp_hr and cleans it up
 def make_string_cleanup(gp_hour):
     times_updated = 0
     if gp_hour == 'Titty Boi 223':
@@ -360,13 +457,42 @@ def make_string_cleanup(gp_hour):
 
     return price
 
+#if the player's level isn't a valid level
+#we set it to 75 by default
+def make_level_cleanup(player_level):
+    xp_level_df = Experience.get_level_xp_df()
+    
+    try:
+        int(player_level)
+    except:
+        return 75
+    
+    if int(player_level) > 0 and int(player_level) < 100:
+        return int(player_level)
+        
+    else:
+        player_level = 75
+    return player_level
+
+#cleans up our gp_hour and our player level
+#returns gp at [0]
+#returns level at [1]
+def get_total_cleanup(gp_hour, player_level):
+    gp = make_string_cleanup(gp_hour)
+    player_level = make_level_cleanup(player_level)
+    
+    combined_list = []
+    combined_list.append(gp)
+    combined_list.append(player_level)
+    
+    return combined_list
 
 # returns total hours from df
 def make_chart(price, skill):
     all_data = str(skill) + '.json'
     print(all_data)
     all_data = pd.read_json(all_data)
-    all_data = optimize_training_2(all_data, price, 13034431)
+    all_data = optimize_training_2(all_data, price, player_level)
     all_data = all_data.drop(all_data.columns[[0, 1]], axis=1)
 
     total_hours = all_data['Total Hours'].to_list()
@@ -421,5 +547,4 @@ for x in optimized_list:
 
 make_everything(0)
 '''
-#make_everything(1)
 #Items.make_csv()
