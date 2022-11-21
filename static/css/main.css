@@ -92,3 +92,8 @@ img {
     padding-top: 25px;
     border-radius: 10px;
 }
+
+.big_img{
+height: 73%;
+width: 73%;
+}

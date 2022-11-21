@@ -6,17 +6,28 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script src="/static/js/form.js"></script>
 		<script src="{{ url_for('static', filename='js/form.js') }}"></script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-NVWXJ6ZR8V"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-NVWXJ6ZR8V');
+        </script>
 	</head>
 	<body>
 		<div class="socials">
 			<h1>{{ name }} </h1>
-			<a class="patreon" href="https://twitter.com/OSTime13" target="_blank"><img src="/static/img/Twitter_Icon.png"></a>
+			<a class="patreon" href="https://www.youtube.com/watch?v=gs5OuhjilI8" target="_blank"><img src="/static/img/Youtube_Icon.png"></a>
+			<a class="patreon" href="https://twitter.com/OSTimegg" target="_blank"><img src="/static/img/Twitter_Icon.png"></a>
 			<a class="patreon" href="https://www.patreon.com/OSTime?fan_landing=true" target="_blank"><img src="/static/img/Patreon_Icon.png"></a>
 		</div>
 		<div>
 			<form id="gp-form">
 			  <label for="fname">How Much GP/HR Do You Make? (5m, 100k, etc.) </label><br>
 			  <input type="text" id="my-gp" style="width:10%" placeholder="1m">
+			  <input type="text" id="my-level" style="width:10%" placeholder="Enter your Level Here: (99,75, 50, etc.)">
 			  <button type="submit" id="update-button" class="btn btn-primary">Optimize</button>
 			</form> 
 			<button id="click" class="btn btn-secondary">5m</button>
@@ -34,15 +45,23 @@
 			<button class="Yoe" id="firemaking"><img src="/static/img/Firemaking_Icon.PNG"></button>
 			<button class="Yoe" id="cooking"><img src="/static/img/Cooking_Icon.PNG"></button>
 			<button class="Yoe" id="experience"><img src="/static/img/Experience_Icon.PNG"></button>
+			<button class="Yoe" id="info"><img src="/static/img/Info_Icon.PNG"></button>
 		</div>
+
+		<div>
+			<label>
+        	<input type="checkbox" id="macro" /> Macro Hours
+			</label>
+		</div>
+
 		<br>
 		<table style="width:80%" class="table table-striped table-dark">
 			<tr>
-				<th colspan="2">Skill</th>
-				<th>Method</th>
-				<th>Total Hours</th>
-				<th>Training Hours</th>
-				<th>Money Hours</th>
+				<th colspan="2" id="th">Skill</th>
+				<th id="th2">Method</th>
+				<th id="th3">Total Hours</th>
+				<th id="th4">Training Hours</th>
+				<th id="th5">Money Hours</th>
 				<tbody id="t-body"> {{ table_string|safe }}</tbody>
 			</tr>
 		</table>
@@ -130,11 +149,19 @@
 			
 			
 		</script> -->
+
+		<script>
+			const macro = document.querySelector('#macro');
+		</script>
+
+
 		<script>
 			$('form').on('submit', function(event) {
 			$.ajax({
 				data : {
 					gp : $('#my-gp').val(),//text field into variable
+					level : $('#my-level').val(),
+					macro : macro.checked
 				},
 				type : 'POST',
 				url : '/titty'
@@ -145,45 +172,95 @@
 				$('#t-body').append(data);
 			});
 			event.preventDefault();
+			$('#th').empty();
+			$('#th').append('Skill');
+			$('#th2').empty();
+			$('#th2').append('Method');
+			$('#th3').empty();
+			$('#th3').append('Total Hours');
+			$('#th4').empty();
+			$('#th4').append('Training Hours');
+			$('#th5').empty();
+			$('#th5').append('Money Hours');
 		});//gp-form
 
 		$('#click').click(function () {
 			$.ajax({
-				type: 'GET',
+				data : {
+					macro : macro.checked,
+					level : $('#my-level').val()
+				},
+				type: 'POST',
 				url: '/5m',//name of the function in the app
 				success: function (response) {
 					//alert(JSON.stringify(response));//string version of the response
-					//$('h1').text(response);//changes our h1 to the response we get from the server
 					$('#t-body').empty();
 					$('#t-body').append(response);
 					document.getElementById('my-gp').value = '5m';
+					$('#th').empty();
+					$('#th').append('Skill');
+					$('#th2').empty();
+					$('#th2').append('Method');
+					$('#th3').empty();
+					$('#th3').append('Total Hours');
+					$('#th4').empty();
+					$('#th4').append('Training Hours');
+					$('#th5').empty();
+					$('#th5').append('Money Hours');
 				}
 			});
-		});//5m click
+		});//5m
 
 		$('#click2').click(function () {
 			$.ajax({
-				type: 'GET',
+				data : {
+					macro : macro.checked,
+					level : $('#my-level').val()
+				},
+				type: 'POST',
 				url: '/2_5m',//name of the function in the app
 				success: function (response) {
 					//alert(JSON.stringify(response));//string version of the response
-					//$('h1').text(response);//changes our h1 to the response we get from the server
 					$('#t-body').empty();
 					$('#t-body').append(response);
 					document.getElementById('my-gp').value = '2.5m';
+					$('#th').empty();
+					$('#th').append('Skill');
+					$('#th2').empty();
+					$('#th2').append('Method');
+					$('#th3').empty();
+					$('#th3').append('Total Hours');
+					$('#th4').empty();
+					$('#th4').append('Training Hours');
+					$('#th5').empty();
+					$('#th5').append('Money Hours');
 				}
 			});
 		});//2.5m click
 
 		$('#click3').click(function () {
 			$.ajax({
-				type: 'GET',
+				data : {
+					macro : macro.checked,
+					level : $('#my-level').val()
+				},
+				type: 'POST',
 				url: '/1m',//name of the function in the app
 				success: function (response) {
 					//alert(JSON.stringify(response));//string version of the response
 					$('#t-body').empty();
 					$('#t-body').append(response);
 					document.getElementById('my-gp').value = '1m';
+					$('#th').empty();
+					$('#th').append('Skill');
+					$('#th2').empty();
+					$('#th2').append('Method');
+					$('#th3').empty();
+					$('#th3').append('Total Hours');
+					$('#th4').empty();
+					$('#th4').append('Training Hours');
+					$('#th5').empty();
+					$('#th5').append('Money Hours');
 				}
 			});
 		});//1m click
@@ -192,7 +269,9 @@
 			$.ajax({
 				data : {
 					gp : $('#my-gp').val(),//text field into variable
-					skill : 'Herblore'
+					level : $('#my-level').val(),
+					skill : 'Herblore',
+					macro : macro.checked
 				},
 				type: 'POST',
 				url: '/lover',//name of the function in the app
@@ -200,6 +279,16 @@
 					//alert(JSON.stringify(response));//string version of the response
 					$('#t-body').empty();
 					$('#t-body').append(response);
+					$('#th').empty();
+					$('#th').append('Skill');
+					$('#th2').empty();
+					$('#th2').append('Method');
+					$('#th3').empty();
+					$('#th3').append('Total Hours');
+					$('#th4').empty();
+					$('#th4').append('Training Hours');
+					$('#th5').empty();
+					$('#th5').append('Money Hours');
 				}
 			});
 		});//herblore click
@@ -208,7 +297,9 @@
 			$.ajax({
 				data : {
 					gp : $('#my-gp').val(),//text field into variable
-					skill : 'Prayer'
+					level : $('#my-level').val(),
+					skill : 'Prayer',
+					macro : macro.checked
 				},
 				type: 'POST',
 				url: '/lover',//name of the function in the app
@@ -216,6 +307,16 @@
 					//alert(JSON.stringify(response));//string version of the response
 					$('#t-body').empty();
 					$('#t-body').append(response);
+					$('#th').empty();
+					$('#th').append('Skill');
+					$('#th2').empty();
+					$('#th2').append('Method');
+					$('#th3').empty();
+					$('#th3').append('Total Hours');
+					$('#th4').empty();
+					$('#th4').append('Training Hours');
+					$('#th5').empty();
+					$('#th5').append('Money Hours');
 				}
 			});
 		});//prayer click
@@ -224,7 +325,9 @@
 			$.ajax({
 				data : {
 					gp : $('#my-gp').val(),//text field into variable
-					skill : 'Crafting'
+					level : $('#my-level').val(),
+					skill : 'Crafting',
+					macro : macro.checked
 				},
 				type: 'POST',
 				url: '/lover',//name of the function in the app
@@ -232,6 +335,16 @@
 					//alert(JSON.stringify(response));//string version of the response
 					$('#t-body').empty();
 					$('#t-body').append(response);
+					$('#th').empty();
+					$('#th').append('Skill');
+					$('#th2').empty();
+					$('#th2').append('Method');
+					$('#th3').empty();
+					$('#th3').append('Total Hours');
+					$('#th4').empty();
+					$('#th4').append('Training Hours');
+					$('#th5').empty();
+					$('#th5').append('Money Hours');
 				}
 			});
 		});//crafting click
@@ -240,7 +353,9 @@
 			$.ajax({
 				data : {
 					gp : $('#my-gp').val(),//text field into variable
-					skill : 'Magic'
+					level : $('#my-level').val(),
+					skill : 'Magic',
+					macro : macro.checked
 				},
 				type: 'POST',
 				url: '/lover',//name of the function in the app
@@ -248,6 +363,16 @@
 					//alert(JSON.stringify(response));//string version of the response
 					$('#t-body').empty();
 					$('#t-body').append(response);
+					$('#th').empty();
+					$('#th').append('Skill');
+					$('#th2').empty();
+					$('#th2').append('Method');
+					$('#th3').empty();
+					$('#th3').append('Total Hours');
+					$('#th4').empty();
+					$('#th4').append('Training Hours');
+					$('#th5').empty();
+					$('#th5').append('Money Hours');
 				}
 			});
 		});//magic click
@@ -256,7 +381,9 @@
 			$.ajax({
 				data : {
 					gp : $('#my-gp').val(),//text field into variable
-					skill : 'Fletching'
+					level : $('#my-level').val(),
+					skill : 'Fletching',
+					macro : macro.checked
 				},
 				type: 'POST',
 				url: '/lover',//name of the function in the app
@@ -264,6 +391,16 @@
 					//alert(JSON.stringify(response));//string version of the response
 					$('#t-body').empty();
 					$('#t-body').append(response);
+					$('#th').empty();
+					$('#th').append('Skill');
+					$('#th2').empty();
+					$('#th2').append('Method');
+					$('#th3').empty();
+					$('#th3').append('Total Hours');
+					$('#th4').empty();
+					$('#th4').append('Training Hours');
+					$('#th5').empty();
+					$('#th5').append('Money Hours');
 				}
 			});
 		});//fletching click
@@ -272,7 +409,9 @@
 			$.ajax({
 				data : {
 					gp : $('#my-gp').val(),//text field into variable
-					skill : 'Smithing'
+					level : $('#my-level').val(),
+					skill : 'Smithing',
+					macro : macro.checked
 				},
 				type: 'POST',
 				url: '/lover',//name of the function in the app
@@ -280,6 +419,16 @@
 					//alert(JSON.stringify(response));//string version of the response
 					$('#t-body').empty();
 					$('#t-body').append(response);
+					$('#th').empty();
+					$('#th').append('Skill');
+					$('#th2').empty();
+					$('#th2').append('Method');
+					$('#th3').empty();
+					$('#th3').append('Total Hours');
+					$('#th4').empty();
+					$('#th4').append('Training Hours');
+					$('#th5').empty();
+					$('#th5').append('Money Hours');
 				}
 			});
 		});//smithing click
@@ -288,7 +437,9 @@
 			$.ajax({
 				data : {
 					gp : $('#my-gp').val(),//text field into variable
-					skill : 'Construction'
+					level : $('#my-level').val(),
+					skill : 'Construction',
+					macro : macro.checked
 				},
 				type: 'POST',
 				url: '/lover',//name of the function in the app
@@ -296,6 +447,16 @@
 					//alert(JSON.stringify(response));//string version of the response
 					$('#t-body').empty();
 					$('#t-body').append(response);
+					$('#th').empty();
+					$('#th').append('Skill');
+					$('#th2').empty();
+					$('#th2').append('Method');
+					$('#th3').empty();
+					$('#th3').append('Total Hours');
+					$('#th4').empty();
+					$('#th4').append('Training Hours');
+					$('#th5').empty();
+					$('#th5').append('Money Hours');
 				}
 			});
 		});//construction click
@@ -304,7 +465,9 @@
 			$.ajax({
 				data : {
 					gp : $('#my-gp').val(),//text field into variable
-					skill : 'Firemaking'
+					level : $('#my-level').val(),
+					skill : 'Firemaking',
+					macro : macro.checked
 				},
 				type: 'POST',
 				url: '/lover',//name of the function in the app
@@ -312,6 +475,16 @@
 					//alert(JSON.stringify(response));//string version of the response
 					$('#t-body').empty();
 					$('#t-body').append(response);
+					$('#th').empty();
+					$('#th').append('Skill');
+					$('#th2').empty();
+					$('#th2').append('Method');
+					$('#th3').empty();
+					$('#th3').append('Total Hours');
+					$('#th4').empty();
+					$('#th4').append('Training Hours');
+					$('#th5').empty();
+					$('#th5').append('Money Hours');
 				}
 			});
 		});//firemaking click
@@ -320,7 +493,9 @@
 			$.ajax({
 				data : {
 					gp : $('#my-gp').val(),//text field into variable
-					skill : 'Cooking'
+					level : $('#my-level').val(),
+					skill : 'Cooking',
+					macro : macro.checked
 				},
 				type: 'POST',
 				url: '/lover',//name of the function in the app
@@ -328,6 +503,16 @@
 					//alert(JSON.stringify(response));//string version of the response
 					$('#t-body').empty();
 					$('#t-body').append(response);
+					$('#th').empty();
+					$('#th').append('Skill');
+					$('#th2').empty();
+					$('#th2').append('Method');
+					$('#th3').empty();
+					$('#th3').append('Total Hours');
+					$('#th4').empty();
+					$('#th4').append('Training Hours');
+					$('#th5').empty();
+					$('#th5').append('Money Hours');
 				}
 			});
 		});//cooking click
@@ -336,6 +521,8 @@
 			$.ajax({
 				data : {
 					gp : $('#my-gp').val(),//text field into variable
+					level : $('#my-level').val(),
+					macro : macro.checked
 				},
 				type: 'POST',
 				url: '/titty',//name of the function in the app
@@ -343,9 +530,43 @@
 					//alert(JSON.stringify(response));//string version of the response
 					$('#t-body').empty();
 					$('#t-body').append(response);
+					$('#th').empty();
+					$('#th').append('Skill');
+					$('#th2').empty();
+					$('#th2').append('Method');
+					$('#th3').empty();
+					$('#th3').append('Total Hours');
+					$('#th4').empty();
+					$('#th4').append('Training Hours');
+					$('#th5').empty();
+					$('#th5').append('Money Hours');
 				}
 			});
 		});//experience click
+
+		$('#info').click(function () {
+			$.ajax({
+				data : {
+					gp : $('#my-gp').val(),//text field into variable
+					level : $('#my-level').val(),
+					skill : 'Herblore'
+				},
+				type: 'POST',
+				url: '/info',//name of the function in the app
+				success: function (response) {
+					//alert(JSON.stringify(response));//string version of the response
+					$('#th').empty();
+					$('#th').append('FAQs');
+					$('#th2').empty();
+					$('#th3').empty();
+					$('#th4').empty();
+					$('#th5').empty();
+					$('#t-body').empty();
+					$('#t-body').append(response);
+				}
+			});
+		});//info click
+
 		</script>
 		<!--<button id="ye">Click Me</button> -->
 		<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --->
