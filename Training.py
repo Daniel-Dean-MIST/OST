@@ -555,3 +555,5 @@ for x in optimized_list:
 make_everything(0)
 '''
 #Items.make_csv()
+
+make_everything()
