@@ -1,0 +1,248 @@
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+//$(document).ready(function() {
+function goes(){
+	$('#herblore').click(function () {
+	$.ajax({
+		type: 'GET',
+		url: '/1m',//name of the function in the app
+		success: function (response) {
+			//alert('YEEAH');//string version of the response
+			$('#t-body').empty();
+			$('#t-body').append(response);
+		}
+	});
+});
+};
+	
+//)};
+
+$('form').on('submit', function(event) {
+	$.ajax({
+		data : {
+			gp : $('#my-gp').val(),//text field into variable
+		},
+		type : 'POST',
+		url : '/titty'
+	})
+	.done(function(data) {
+		//alert(data);
+		$('#t-body').empty();
+		$('#t-body').append(data);
+	});
+	event.preventDefault();
+});//gp-form
+
+$('#click').click(function () {
+	$.ajax({
+		type: 'GET',
+		url: '/5m',//name of the function in the app
+		success: function (response) {
+			//alert(JSON.stringify(response));//string version of the response
+			//$('h1').text(response);//changes our h1 to the response we get from the server
+			$('#t-body').empty();
+			$('#t-body').append(response);
+			document.getElementById('my-gp').value = '5m';
+		}
+	});
+});//5m click
+
+$('#click2').click(function () {
+	$.ajax({
+		type: 'GET',
+		url: '/2_5m',//name of the function in the app
+		success: function (response) {
+			//alert(JSON.stringify(response));//string version of the response
+			//$('h1').text(response);//changes our h1 to the response we get from the server
+			$('#t-body').empty();
+			$('#t-body').append(response);
+			document.getElementById('my-gp').value = '2.5m';
+		}
+	});
+});//2.5m click
+
+$('#click3').click(function () {
+	$.ajax({
+		type: 'GET',
+		url: '/1m',//name of the function in the app
+		success: function (response) {
+			//alert(JSON.stringify(response));//string version of the response
+			$('#t-body').empty();
+			$('#t-body').append(response);
+			document.getElementById('my-gp').value = '1m';
+		}
+	});
+});//1m click
+
+$('#herblore').click(function () {
+	$.ajax({
+		data : {
+			gp : $('#my-gp').val(),//text field into variable
+			skill : 'Herblore'
+		},
+		type: 'POST',
+		url: '/lover',//name of the function in the app
+		success: function (response) {
+			//alert(JSON.stringify(response));//string version of the response
+			$('#t-body').empty();
+			$('#t-body').append(response);
+		}
+	});
+});//herblore click
+
+$('#prayer').click(function () {
+	$.ajax({
+		data : {
+			gp : $('#my-gp').val(),//text field into variable
+			skill : 'Prayer'
+		},
+		type: 'POST',
+		url: '/lover',//name of the function in the app
+		success: function (response) {
+			//alert(JSON.stringify(response));//string version of the response
+			$('#t-body').empty();
+			$('#t-body').append(response);
+		}
+	});
+});//prayer click
+
+$('#crafting').click(function () {
+	$.ajax({
+		data : {
+			gp : $('#my-gp').val(),//text field into variable
+			skill : 'Crafting'
+		},
+		type: 'POST',
+		url: '/lover',//name of the function in the app
+		success: function (response) {
+			//alert(JSON.stringify(response));//string version of the response
+			$('#t-body').empty();
+			$('#t-body').append(response);
+		}
+	});
+});//crafting click
+
+$('#magic').click(function () {
+	$.ajax({
+		data : {
+			gp : $('#my-gp').val(),//text field into variable
+			skill : 'Magic'
+		},
+		type: 'POST',
+		url: '/lover',//name of the function in the app
+		success: function (response) {
+			//alert(JSON.stringify(response));//string version of the response
+			$('#t-body').empty();
+			$('#t-body').append(response);
+		}
+	});
+});//magic click
+
+$('#fletching').click(function () {
+	$.ajax({
+		data : {
+			gp : $('#my-gp').val(),//text field into variable
+			skill : 'Fletching'
+		},
+		type: 'POST',
+		url: '/lover',//name of the function in the app
+		success: function (response) {
+			//alert(JSON.stringify(response));//string version of the response
+			$('#t-body').empty();
+			$('#t-body').append(response);
+		}
+	});
+});//fletching click
+
+$('#smithing').click(function () {
+	$.ajax({
+		data : {
+			gp : $('#my-gp').val(),//text field into variable
+			skill : 'Smithing'
+		},
+		type: 'POST',
+		url: '/lover',//name of the function in the app
+		success: function (response) {
+			//alert(JSON.stringify(response));//string version of the response
+			$('#t-body').empty();
+			$('#t-body').append(response);
+		}
+	});
+});//smithing click
+
+$('#construction').click(function () {
+	$.ajax({
+		data : {
+			gp : $('#my-gp').val(),//text field into variable
+			skill : 'Construction'
+		},
+		type: 'POST',
+		url: '/lover',//name of the function in the app
+		success: function (response) {
+			//alert(JSON.stringify(response));//string version of the response
+			$('#t-body').empty();
+			$('#t-body').append(response);
+		}
+	});
+});//construction click
+
+$('#firemaking').click(function () {
+	$.ajax({
+		data : {
+			gp : $('#my-gp').val(),//text field into variable
+			skill : 'Firemaking'
+		},
+		type: 'POST',
+		url: '/lover',//name of the function in the app
+		success: function (response) {
+			//alert(JSON.stringify(response));//string version of the response
+			$('#t-body').empty();
+			$('#t-body').append(response);
+		}
+	});
+});//firemaking click
+
+$('#cooking').click(function () {
+	$.ajax({
+		data : {
+			gp : $('#my-gp').val(),//text field into variable
+			skill : 'Cooking'
+		},
+		type: 'POST',
+		url: '/lover',//name of the function in the app
+		success: function (response) {
+			//alert(JSON.stringify(response));//string version of the response
+			$('#t-body').empty();
+			$('#t-body').append(response);
+		}
+	});
+});//cooking click
+
+$('#experience').click(function () {
+	$.ajax({
+		data : {
+			gp : $('#my-gp').val(),//text field into variable
+		},
+		type: 'POST',
+		url: '/titty',//name of the function in the app
+		success: function (response) {
+			//alert(JSON.stringify(response));//string version of the response
+			$('#t-body').empty();
+			$('#t-body').append(response);
+		}
+	});
+});//experience click
+
+function hoes(){
+	$.ajax({
+		type: 'GET',
+		url: '/chart',//name of the function in the app
+		success: function (response) {
+			return response;
+		}
+	});
+});//hoes
+
+function goe(){
+	return 3;
+}
