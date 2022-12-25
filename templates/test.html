@@ -45,7 +45,7 @@
 			<button class="Yoe" id="construction"><img src="/static/img/Construction_Icon.PNG"></button>
 			<button class="Yoe" id="firemaking"><img src="/static/img/Firemaking_Icon.PNG"></button>
 			<button class="Yoe" id="cooking"><img src="/static/img/Cooking_Icon.PNG"></button>
-			<button class="Yoe" id="experience"><img src="/static/img/Experience_Icon.PNG"></button>
+			<button class="Yoe" id="experience2"><img src="/static/img/Experience_Icon.PNG"></button>
 			<button class="Yoe" id="info"><img src="/static/img/Info_Icon.PNG"></button>
 		</div>
 
@@ -544,6 +544,33 @@
 				}
 			});
 		});//experience click
+		
+		$('#experience2').click(function () {
+			$.ajax({
+				data : {
+					gp : $('#my-gp').val(),//text field into variable
+					level : $('#my-level').val(),
+					macro : macro.checked
+				},
+				type: 'POST',
+				url: '/titty',//name of the function in the app
+				success: function (response) {
+					//alert(JSON.stringify(response));//string version of the response
+					$('#t-body').empty();
+					$('#t-body').append(response);
+					$('#th').empty();
+					$('#th').append('Skill');
+					$('#th2').empty();
+					$('#th2').append('Method');
+					$('#th3').empty();
+					$('#th3').append('Total Hours');
+					$('#th4').empty();
+					$('#th4').append('Training Hours');
+					$('#th5').empty();
+					$('#th5').append('Money Hours');
+				}
+			});
+		});//experience2 click
 
 		$('#info').click(function () {
 			$.ajax({
