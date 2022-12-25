@@ -70,7 +70,13 @@ def optimize_training_2(df, money_hr, player_level):
     #gets the base level to xp df
     level_xp_df = Experience.get_level_xp_df()
     player_xp= level_xp_df['Xp'].loc[player_level]
-    needed_exp = level_xp_df['Xp'].loc[99] - int(player_xp)
+    
+    #if a player is level 99 then we assume they are going for 200m exp
+    #else we assume they are going for 99
+    if player_level == 99:
+        needed_exp = 200000000
+    else:
+        needed_exp = level_xp_df['Xp'].loc[99] - int(player_xp)
 
     df2 = df
 
@@ -127,7 +133,13 @@ def optimize_training_2(df, money_hr, player_level):
 def optimize_training_3(df, money_hr, player_xp):
 
     level_xp_df = Experience.get_level_xp_df()
-    needed_exp = level_xp_df['Xp'].loc[99] - int(player_xp)
+    
+    #if a player is level 99 then we assume they are going for 200m exp
+    #else we assume they are going for 99
+    if player_level == 99:
+        needed_exp = 200000000
+    else:
+        needed_exp = level_xp_df['Xp'].loc[99] - int(player_xp)
     
     df2 = df
 
@@ -476,7 +488,10 @@ def make_level_cleanup(player_level):
     
     if int(player_level) > 0 and int(player_level) < 100:
         return int(player_level)
-        
+    
+    elif int(player_level) >= 99:
+        return int(99)
+
     else:
         player_level = 75
     return player_level
