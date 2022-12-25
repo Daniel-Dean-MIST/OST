@@ -264,7 +264,7 @@ def info():
     table_string += '<td>Icon for Methods Describing Volume Traded per Item, Adding the Runecrafting Skill, and Adding Charts</td>'
     table_string += '</tr>'
     table_string += '<tr>'
-    table_string += '<td>What are the Calculations for if My Level is 99 >=?</td>'
+    table_string += '<td>What are the Calculations for if My Level is 99 <=?</td>'
     table_string += '</tr>'
     table_string += '<tr>'
     table_string += '<td>The Calculations are for if you are going for 200m xp</td>'
