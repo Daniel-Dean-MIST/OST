@@ -264,10 +264,10 @@ def info():
     table_string += '<td>Icon for Methods Describing Volume Traded per Item, Adding the Runecrafting Skill, and Adding Charts</td>'
     table_string += '</tr>'
     table_string += '<tr>'
-    table_string += '<td>What are the Calculations for if my Level is 99 >=?</td>'
+    table_string += '<td>What are the Calculations for if My Level is 99 >=?</td>'
     table_string += '</tr>'
     table_string += '<tr>'
-    table_string += '<td>The Calculation is for if you are going for 200m xp</td>'
+    table_string += '<td>The Calculations are for if you are going for 200m xp</td>'
     table_string += '</tr>'
     '''
     'OSTime optimizes the best training methods for your account based off of a simple formula. \nTotal Hours = Training Hours + Money Hours to pay for the Training Hours. It does this under the assumption that you are going from 1-99 in each skill. Ie. how long it would take you to gain 13m XP doing each training method' \
