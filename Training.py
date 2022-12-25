@@ -124,15 +124,22 @@ def optimize_training_2(df, money_hr, player_level):
 
     df2['Efficiency'] = formatted_efficiency_list
     
-    df2 = df2[df2['Level'] < player_level]
+    df2 = df2[df2['Level'] <= player_level]
     df2 = df2.reset_index(drop=True)
     
     return df2
 
 #for macro hours
-def optimize_training_3(df, money_hr, player_xp):
+def optimize_training_3(df, money_hr, player_level):
 
+    #print(player_xp)
+
+    if player_level < 1 or player_level > 99:
+        player_level = 75
+    #player_xp = int(player_xp)
+    #gets the base level to xp df
     level_xp_df = Experience.get_level_xp_df()
+    player_xp= level_xp_df['Xp'].loc[player_level]
     
     #if a player is level 99 then we assume they are going for 200m exp
     #else we assume they are going for 99
@@ -140,9 +147,11 @@ def optimize_training_3(df, money_hr, player_xp):
         needed_exp = 200000000
     else:
         needed_exp = level_xp_df['Xp'].loc[99] - int(player_xp)
-    
+
     df2 = df
 
+    print(player_level)
+    
     # how many hours our user needs to train
     total_training_hours = round(needed_exp / df['XP/HR'], 2)
 
@@ -200,6 +209,16 @@ def optimize_training_3(df, money_hr, player_xp):
 
     df2['Efficiency'] = formatted_efficiency_list
     df2['Total Hours'] = temp_total_list
+
+    print('Df2', df2['Level'])
+
+    df2 = df2[df2['Level'] <= player_level]
+    df2 = df2.reset_index(drop=True)
+    
+    print('Df2 2', df2['Level'])
+
+    #df2 = df2.reset_index(drop=True)
+
     return df2
 
 # gets all of our prices and returns optimized df's
