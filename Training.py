@@ -210,14 +210,8 @@ def optimize_training_3(df, money_hr, player_level):
     df2['Efficiency'] = formatted_efficiency_list
     df2['Total Hours'] = temp_total_list
 
-    print('Df2', df2['Level'])
-
     df2 = df2[df2['Level'] <= player_level]
     df2 = df2.reset_index(drop=True)
-    
-    print('Df2 2', df2['Level'])
-
-    #df2 = df2.reset_index(drop=True)
 
     return df2
 
