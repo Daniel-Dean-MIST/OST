@@ -411,6 +411,7 @@ def make_skill_string(price, skill, checked, player_level):
         table_string += '<td>' + str(round(my_data['Total Hours'].to_dict()[i], 2)) + '</td>'
         table_string += '<td>' + str(round(my_data['Training Hours'].to_dict()[i], 2)) + '</td>'
         table_string += '<td>' + str(round(my_data['Money Making Hours'].to_dict()[i], 2)) + '</td>'
+        table_string += '<td>' + str(round(my_data['Achievable XP/HR'].to_dict()[i] / 1000, 2)) + 'k</td>'
         table_string += '<td>' + my_data['Efficiency'].to_dict()[i] + ' : Efficient</td>'
         table_string += "</tr>"
 
