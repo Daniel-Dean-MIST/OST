@@ -210,7 +210,19 @@ def optimize_training_3(df, money_hr, player_level):
 
     df2['Efficiency'] = formatted_efficiency_list
     df2['Total Hours'] = temp_total_list
+    df2['Achievable XP/HR'] = round(needed_exp / df2['Total Hours'], 2)
 
+    #making positive xp/hr
+    achieve_list = df2['Achievable XP/HR'].to_list()
+    temp_list = []
+
+    for x in achieve_list:
+        if x <= 0:
+            x *= -1
+        temp_list.append(x)
+    
+    df2['Achievable XP/HR'] = temp_list
+    
     df2 = df2[df2['Level'] <= player_level]
     df2 = df2.reset_index(drop=True)
 
