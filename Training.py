@@ -107,6 +107,7 @@ def optimize_training_2(df, money_hr, player_level):
 
     df2['Money Making Hours'] = money_hours_list
     df2['Total Hours'] = df2['Training Hours'] + df2['Money Making Hours']
+    df2['Achievable XP/HR'] = round(needed_exp / df['Total Hours'], 2)
 
     # Sorts our df based off of Total Hours
     df2 = df2.sort_values('Total Hours')
@@ -396,7 +397,7 @@ def make_skill_string(price, skill, checked, player_level):
 
     product_list = all_data['Product'].to_list()
     my_data = all_data
-
+    print(my_data)
     i = 0
 
     table_string = ''
