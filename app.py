@@ -10,19 +10,13 @@ from apscheduler.schedulers.background import BackgroundScheduler
 import time
 import atexit
 
-sched = BackgroundScheduler(daemon=True)
-sched.add_job(Training.make_everything,'interval',minutes=60)
-sched.start()
-#keeps the thread alive
-try:
-    while True:
-        time.sleep(5)
-except:
-    sched.shutdown()
 
+sched = BackgroundScheduler(daemon=True)
+sched.add_job(Training.make_everything,'interval',minutes=2)
+sched.start()
 
 # Shut down the scheduler when exiting the app
-#atexit.register(lambda: sched.shutdown())
+atexit.register(lambda: sched.shutdown())
 
 app = Flask(__name__, static_url_path='/static')
 

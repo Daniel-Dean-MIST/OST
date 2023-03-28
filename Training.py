@@ -107,6 +107,7 @@ def optimize_training_2(df, money_hr, player_level):
 
     df2['Money Making Hours'] = money_hours_list
     df2['Total Hours'] = df2['Training Hours'] + df2['Money Making Hours']
+    df2['Achievable XP/HR'] = round(needed_exp / df['Total Hours'], 2)
 
     # Sorts our df based off of Total Hours
     df2 = df2.sort_values('Total Hours')
@@ -209,6 +210,18 @@ def optimize_training_3(df, money_hr, player_level):
 
     df2['Efficiency'] = formatted_efficiency_list
     df2['Total Hours'] = temp_total_list
+    df2['Achievable XP/HR'] = round(needed_exp / df2['Total Hours'], 2)
+
+    #making positive xp/hr
+    achieve_list = df2['Achievable XP/HR'].to_list()
+    temp_list = []
+
+    for x in achieve_list:
+        if x <= 0:
+            x *= -1
+        temp_list.append(x)
+    
+    df2['Achievable XP/HR'] = temp_list
 
     df2 = df2[df2['Level'] <= player_level]
     df2 = df2.reset_index(drop=True)
@@ -344,6 +357,7 @@ def make_table_string(price, macro, player_level):
     total_hours = 0
     training_hours = 0
     money_hours = 0
+    achievable_xp_hr = 0
 
     while i < len(skill_name_list):
         my_data = all_data[i]
@@ -356,16 +370,18 @@ def make_table_string(price, macro, player_level):
         table_string += '<td>' + str(round(my_data['Total Hours'].to_dict()[0], 2)) + '</td>'
         table_string += '<td>' + str(round(my_data['Training Hours'].to_dict()[0], 2)) + '</td>'
         table_string += '<td>' + str(round(my_data['Money Making Hours'].to_dict()[0], 2)) + '</td>'
+        table_string += '<td>' + str(round(my_data['Achievable XP/HR'].to_dict()[0] / 1000, 2)) + 'k</td>'
         table_string += "</tr>"
 
         total_hours += int(my_data['Total Hours'].to_dict()[0])
         training_hours += int(my_data['Training Hours'].to_dict()[0])
         money_hours += int(my_data['Money Making Hours'].to_dict()[0])
+        achievable_xp_hr += int(my_data['Money Making Hours'].to_dict()[0])
 
         i += 1
 
     table_string += '<tr><td>Total Hours:</td><td><button class="Yoe"><img src="/static/img/Experience_Icon.PNG"</button></td><td>----</td><td>' + str(
-        total_hours) + '</td><td>' + str(training_hours) + '</td><td>' + str(money_hours) + '</td>'
+        total_hours) + '</td><td>' + str(training_hours) + '</td><td>' + str(money_hours) + '</td>' + str(achievable_xp_hr) + '</td><td>'
 
     # print(my_data["Base Ingredient"]["Teak plank"])
     # e = [print(x) for x in my_data["Base Ingredient"]]
@@ -410,6 +426,7 @@ def make_skill_string(price, skill, checked, player_level):
         table_string += '<td>' + str(round(my_data['Total Hours'].to_dict()[i], 2)) + '</td>'
         table_string += '<td>' + str(round(my_data['Training Hours'].to_dict()[i], 2)) + '</td>'
         table_string += '<td>' + str(round(my_data['Money Making Hours'].to_dict()[i], 2)) + '</td>'
+        table_string += '<td>' + str(round(my_data['Achievable XP/HR'].to_dict()[i] / 1000, 2)) + 'k</td>'
         table_string += '<td>' + my_data['Efficiency'].to_dict()[i] + ' : Efficient</td>'
         table_string += "</tr>"
 
