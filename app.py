@@ -11,8 +11,9 @@ import time
 import atexit
 
 
-sched = BackgroundScheduler(daemon=True)
-sched.add_job(Training.make_everything,'interval',minutes=2)
+#sched = BackgroundScheduler(daemon=True)
+sched = BackgroundScheduler()
+sched.add_job(Training.make_everything,'interval',minutes=60)
 sched.start()
 
 # Shut down the scheduler when exiting the app
@@ -319,5 +320,8 @@ def chart():
 
     return [1]
 '''
+
+#trys to keep our thread alive
+
 if __name__ =='__main__':
     app.run()
