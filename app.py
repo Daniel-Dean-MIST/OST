@@ -13,6 +13,13 @@ import atexit
 sched = BackgroundScheduler(daemon=True)
 sched.add_job(Training.make_everything,'interval',minutes=60)
 sched.start()
+#keeps the thread alive
+try:
+    while True:
+        time.sleep(5)
+except:
+    sched.shutdown()
+
 
 # Shut down the scheduler when exiting the app
 #atexit.register(lambda: sched.shutdown())
