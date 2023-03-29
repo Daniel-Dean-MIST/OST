@@ -650,9 +650,38 @@
 				}
 			});
 		});//BTC click
-	
-		</script>
+		
+		$('#herblore2').click(function () {
+			$.ajax({
+				data : {
+					gp : $('#my-gp').val(),//text field into variable
+					level : $('#my-level').val(),
+					skill : 'Herblore',
+					macro : macro.checked
+				},
+				type: 'POST',
+				url: '/lover',//name of the function in the app
+				success: function (response) {
+					//alert(JSON.stringify(response));//string version of the response
+					$('#t-body').empty();
+					$('#t-body').append(response);
+					$('#th').empty();
+					$('#th').append('Skill');
+					$('#th2').empty();
+					$('#th2').append('Method');
+					$('#th3').empty();
+					$('#th3').append('Total Hours');
+					$('#th4').empty();
+					$('#th4').append('Training Hours');
+					$('#th5').empty();
+					$('#th5').append('Money Hours');
+					$('#th6').empty();
+					$('#th6').append('Achievable XP/HR');
+				}
+			});
+		});//herblore click
 
+		</script>
 		<!--<button id="ye">Click Me</button> -->
 		<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --->
 		<!--<script>
