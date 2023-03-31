@@ -491,7 +491,7 @@ $('#btc').click(function () {
 	});
 });//BTC click
 
-$('#herblore2').click(function () {
+$('#t-body').on('click','#herblore2', (function () {
 	$.ajax({
 		data : {
 			gp : $('#my-gp').val(),//text field into variable
@@ -519,5 +519,244 @@ $('#herblore2').click(function () {
 			$('#th6').append('Achievable XP/HR');
 		}
 	});
-});//herblore click
+}));//herblore2 click
 
+$('#t-body').on('click','#prayer2', (function () {
+	$.ajax({
+		data : {
+			gp : $('#my-gp').val(),//text field into variable
+			level : $('#my-level').val(),
+			skill : 'Prayer',
+			macro : macro.checked
+		},
+		type: 'POST',
+		url: '/lover',//name of the function in the app
+		success: function (response) {
+			//alert(JSON.stringify(response));//string version of the response
+			$('#t-body').empty();
+			$('#t-body').append(response);
+			$('#th').empty();
+			$('#th').append('Skill');
+			$('#th2').empty();
+			$('#th2').append('Method');
+			$('#th3').empty();
+			$('#th3').append('Total Hours');
+			$('#th4').empty();
+			$('#th4').append('Training Hours');
+			$('#th5').empty();
+			$('#th5').append('Money Hours');
+			$('#th6').empty();
+			$('#th6').append('Achievable XP/HR');
+		}
+	});
+}));//Prayer2 click
+
+$('#t-body').on('click','#crafting2', (function () {
+	$.ajax({
+		data : {
+			gp : $('#my-gp').val(),//text field into variable
+			level : $('#my-level').val(),
+			skill : 'Crafting',
+			macro : macro.checked
+		},
+		type: 'POST',
+		url: '/lover',//name of the function in the app
+		success: function (response) {
+			//alert(JSON.stringify(response));//string version of the response
+			$('#t-body').empty();
+			$('#t-body').append(response);
+			$('#th').empty();
+			$('#th').append('Skill');
+			$('#th2').empty();
+			$('#th2').append('Method');
+			$('#th3').empty();
+			$('#th3').append('Total Hours');
+			$('#th4').empty();
+			$('#th4').append('Training Hours');
+			$('#th5').empty();
+			$('#th5').append('Money Hours');
+			$('#th6').empty();
+			$('#th6').append('Achievable XP/HR');
+		}
+	});
+}));//Crafting2 click
+
+$('#t-body').on('click','#magic2', (function () {
+	$.ajax({
+		data : {
+			gp : $('#my-gp').val(),//text field into variable
+			level : $('#my-level').val(),
+			skill : 'Magic',
+			macro : macro.checked
+		},
+		type: 'POST',
+		url: '/lover',//name of the function in the app
+		success: function (response) {
+			//alert(JSON.stringify(response));//string version of the response
+			$('#t-body').empty();
+			$('#t-body').append(response);
+			$('#th').empty();
+			$('#th').append('Skill');
+			$('#th2').empty();
+			$('#th2').append('Method');
+			$('#th3').empty();
+			$('#th3').append('Total Hours');
+			$('#th4').empty();
+			$('#th4').append('Training Hours');
+			$('#th5').empty();
+			$('#th5').append('Money Hours');
+			$('#th6').empty();
+			$('#th6').append('Achievable XP/HR');
+		}
+	});
+}));//Magic2 click
+
+$('#t-body').on('click','#fletching2', (function () {
+	$.ajax({
+		data : {
+			gp : $('#my-gp').val(),//text field into variable
+			level : $('#my-level').val(),
+			skill : 'Fletching',
+			macro : macro.checked
+		},
+		type: 'POST',
+		url: '/lover',//name of the function in the app
+		success: function (response) {
+			//alert(JSON.stringify(response));//string version of the response
+			$('#t-body').empty();
+			$('#t-body').append(response);
+			$('#th').empty();
+			$('#th').append('Skill');
+			$('#th2').empty();
+			$('#th2').append('Method');
+			$('#th3').empty();
+			$('#th3').append('Total Hours');
+			$('#th4').empty();
+			$('#th4').append('Training Hours');
+			$('#th5').empty();
+			$('#th5').append('Money Hours');
+			$('#th6').empty();
+			$('#th6').append('Achievable XP/HR');
+		}
+	});
+}));//Fletching2 click
+
+$('#t-body').on('click','#smithing2', (function () {
+	$.ajax({
+		data : {
+			gp : $('#my-gp').val(),//text field into variable
+			level : $('#my-level').val(),
+			skill : 'Smithing',
+			macro : macro.checked
+		},
+		type: 'POST',
+		url: '/lover',//name of the function in the app
+		success: function (response) {
+			//alert(JSON.stringify(response));//string version of the response
+			$('#t-body').empty();
+			$('#t-body').append(response);
+			$('#th').empty();
+			$('#th').append('Skill');
+			$('#th2').empty();
+			$('#th2').append('Method');
+			$('#th3').empty();
+			$('#th3').append('Total Hours');
+			$('#th4').empty();
+			$('#th4').append('Training Hours');
+			$('#th5').empty();
+			$('#th5').append('Money Hours');
+			$('#th6').empty();
+			$('#th6').append('Achievable XP/HR');
+		}
+	});
+}));//Smithing2 click
+
+$('#t-body').on('click','#construction2', (function () {
+	$.ajax({
+		data : {
+			gp : $('#my-gp').val(),//text field into variable
+			level : $('#my-level').val(),
+			skill : 'Construction',
+			macro : macro.checked
+		},
+		type: 'POST',
+		url: '/lover',//name of the function in the app
+		success: function (response) {
+			//alert(JSON.stringify(response));//string version of the response
+			$('#t-body').empty();
+			$('#t-body').append(response);
+			$('#th').empty();
+			$('#th').append('Skill');
+			$('#th2').empty();
+			$('#th2').append('Method');
+			$('#th3').empty();
+			$('#th3').append('Total Hours');
+			$('#th4').empty();
+			$('#th4').append('Training Hours');
+			$('#th5').empty();
+			$('#th5').append('Money Hours');
+			$('#th6').empty();
+			$('#th6').append('Achievable XP/HR');
+		}
+	});
+}));//Construction2 click
+
+$('#t-body').on('click','#firemaking2', (function () {
+	$.ajax({
+		data : {
+			gp : $('#my-gp').val(),//text field into variable
+			level : $('#my-level').val(),
+			skill : 'Firemaking',
+			macro : macro.checked
+		},
+		type: 'POST',
+		url: '/lover',//name of the function in the app
+		success: function (response) {
+			//alert(JSON.stringify(response));//string version of the response
+			$('#t-body').empty();
+			$('#t-body').append(response);
+			$('#th').empty();
+			$('#th').append('Skill');
+			$('#th2').empty();
+			$('#th2').append('Method');
+			$('#th3').empty();
+			$('#th3').append('Total Hours');
+			$('#th4').empty();
+			$('#th4').append('Training Hours');
+			$('#th5').empty();
+			$('#th5').append('Money Hours');
+			$('#th6').empty();
+			$('#th6').append('Achievable XP/HR');
+		}
+	});
+}));//Firemaking2 click
+
+$('#t-body').on('click','#cooking2', (function () {
+	$.ajax({
+		data : {
+			gp : $('#my-gp').val(),//text field into variable
+			level : $('#my-level').val(),
+			skill : 'Cooking',
+			macro : macro.checked
+		},
+		type: 'POST',
+		url: '/lover',//name of the function in the app
+		success: function (response) {
+			//alert(JSON.stringify(response));//string version of the response
+			$('#t-body').empty();
+			$('#t-body').append(response);
+			$('#th').empty();
+			$('#th').append('Skill');
+			$('#th2').empty();
+			$('#th2').append('Method');
+			$('#th3').empty();
+			$('#th3').append('Total Hours');
+			$('#th4').empty();
+			$('#th4').append('Training Hours');
+			$('#th5').empty();
+			$('#th5').append('Money Hours');
+			$('#th6').empty();
+			$('#th6').append('Achievable XP/HR');
+		}
+	});
+}));//Cooking2 click

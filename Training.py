@@ -339,6 +339,7 @@ def make_table_string(price, macro, player_level):
                        'Cooking']
     id_list_2 = ['herblore2', 'prayer2', 'crafting2', 'magic2', 'fletching2', 'smithing2', 'construction2', 'firemaking2',
                        'cooking2']
+        
     json_list = ['Herblore.json', 'Prayer.json', 'Crafting.json', 'Magic.json', 'Fletching.json', 'Smithing.json',
                  'Construction.json', 'Firemaking.json', 'Cooking.json']
     img_list = ['Herblore_Icon.PNG', 'Prayer_Icon.PNG', 'Crafting_Icon.PNG', 'Magic_Icon.PNG', 'Fletching_Icon.PNG',
@@ -367,7 +368,7 @@ def make_table_string(price, macro, player_level):
         # print(table_string)
         table_string += '<tr>'
         table_string += '<td class="custo">' + skill_name_list[
-            i] + '</td>' + '<td><button class="Yoe" id="' + id_list_2[i] + '"><img src="/static/img/' + img_list[
+            i] + '</td>' + '<td><button class="Yo" id="' + id_list_2[i] + '"><img src="/static/img/' + img_list[
                             i] + '"></button></td>'
         table_string += '<td>' + str(my_data['Product'].to_dict()[0]) + '</td>'
         table_string += '<td>' + str(round(my_data['Total Hours'].to_dict()[0], 2)) + '</td>'
