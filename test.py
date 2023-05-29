@@ -1,17 +1,15 @@
-class Solution:
-    def isValid(s: str) -> bool:
-        combo_list = {'(':')', ')':'(', '[':']', ']':'[', '{':'}', '}':'{'}
-        
-        reverse_list = []
+import pandas as pd 
 
-        i = len(s)
-        
-        print(i)
+df = pd.DataFrame() 
 
-        while i > 0:
-            reverse_list.append(s[i-1])
+charnumlist = ['5','s2','ree']
+id_list = ['Ko','Po','Do']
 
-            i -= 1
-        return reverse_list
+df['ID'] = id_list
+df['V'] = charnumlist
 
-print(Solution.isValid('Annelise'))
+mask = df['V'].str.isnumeric()
+
+new_df = df[mask]
+
+print(new_df)
