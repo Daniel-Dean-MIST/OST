@@ -11,39 +11,37 @@ import csv
 def get_runelite_info():
 	#url = 'https://prices.runescape.wiki/api/v1/osrs/mapping'
 	#url = 'https://prices.runescape.wiki/api/v1/osrs/latest'
-	url = 'https://oldschool.runescape.wiki/w/Module:GEPrices/data'
+	#url = 'https://oldschool.runescape.wiki/w/Module:GEPrices/data'
+	#url = 'https://oldschool.runescape.wiki/w/Module:GEPrices/data.json'
+	#url = 'https://prices.runescape.wiki/api/v1/osrs/latest'
+	url = 'https://oldschool.runescape.wiki/?title=Module:GEPrices/data.json&action=raw&ctype=application%2Fjson'
+		
 	headers = {
-		'User' : 'DannyD',
-		'Email' : 'danieldean549@gmail.com',
-		'Purpose' : 'Making an optimization site for training skills. Requires item prices as an input.'
+	'User' : 'DannyD',
+	'Email' : 'danieldean549@gmail.com',
+	'Purpose' : 'Making an optimization site for training skills. Requires item prices as an input. Ostime.gg'
 	}
-	response = requests.get(url, headers=headers)
-
+	response = requests.get(url)
+	#response = requests.get(url, headers=headers)
+	print(response)
 	return response
 
 #scrapes all item prices and formats them in a friendly way
 def get_all_info():
 	page = get_runelite_info()
 	soup = BeautifulSoup(page.content, 'html.parser')
-	content = soup.find('pre', {'class': 'mw-code mw-script'})
-	content = content.get_text().replace('return {', '')
+
+	content = soup.getText()
+	content = content.replace('{', '')
 	content = content.replace('}', '')
-	#content = content.replace(',', '')
-	content = content.replace('["', '')
-	content = content.replace('"]', '')
-	content = content.replace('%', '')
-	content = content.replace('_', '')
-	content = content.replace('\n', '')
-	# content = soup.find_all('span')
-	# content = soup.get_attribute_list('id')
-	sleep(uniform(0.0, 3.0))
+	content = content.replace('"', '')
+	content = content.lower()
 	return content
-	#return
 
 #splits all of the items information into a name_list and formats it further
 def get_all_names(content):
     big_list = content.split(',')
-    small_list = [b.split('=') for b in big_list]
+    small_list = [b.split(':') for b in big_list]
     small_list = small_list[2:]
     name_list = [s[0].strip() for s in small_list]
     name_list = [str(n).lower() for n in name_list]
@@ -53,7 +51,7 @@ def get_all_names(content):
 #splits all of the items information into a price_list and formats it further
 def get_all_prices(content):
 	big_list = content.split(',')
-	small_list = [b.split('=') for b in big_list]
+	small_list = [b.split(':') for b in big_list]
 	small_list = small_list[2:]
 	price_list = [int(s[1].strip()) for s in small_list]
 	return price_list
@@ -302,3 +300,5 @@ def make_triple_supplies(supply_list, supply_list_2, supply_list_3, product_list
     return df
 
 #make_csv()
+
+get_all_info()
