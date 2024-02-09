@@ -6,18 +6,18 @@ import Experience, Money_Makers, Training, Items, Herblore, Prayer, Crafting, Ma
 import pandas as pd
 
 #testing automating Training.make_everything() being called every hour
-from apscheduler.schedulers.background import BackgroundScheduler
-import time
-import atexit
+# from apscheduler.schedulers.background import BackgroundScheduler
+# import time
+# import atexit
 
 
-#sched = BackgroundScheduler(daemon=True)
-sched = BackgroundScheduler()
-sched.add_job(Training.make_everything,'interval',minutes=60)
-sched.start()
+# #sched = BackgroundScheduler(daemon=True)
+# sched = BackgroundScheduler()
+# sched.add_job(Training.make_everything,'interval',minutes=60)
+# sched.start()
 
-# Shut down the scheduler when exiting the app
-atexit.register(lambda: sched.shutdown())
+# # Shut down the scheduler when exiting the app
+# atexit.register(lambda: sched.shutdown())
 
 app = Flask(__name__, static_url_path='/static')
 
